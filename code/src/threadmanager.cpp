@@ -1,4 +1,5 @@
 
+
 #include <QRandomGenerator>
 #include <iostream>
 
@@ -6,33 +7,35 @@
 #include "mythread.h"
 
 
-
 ThreadManager::ThreadManager(QObject *parent) :
-    QObject(parent)
+QObject(parent)
 {}
 
-
 /**
- * @brief Cette fonction trie une séquence générée aléatoirement
- * @param seq séquence à trier
- * @param nbThreads le nombre de threads à lancer
- * @return séquence triée
- */
+* @brief Cette fonction trie une séquence générée aléatoirement
+* @param seq séquence à trier
+* @param nbThreads le nombre de threads à lancer
+* @return séquence triée
+*/
 std::vector<int> ThreadManager::startSorting(
-        std::vector<int> seq,
-        unsigned int nbThreads
+std::vector<int> seq,
+unsigned int nbThreads
 )
 {
-    finished = false;
-    
-    // TODO création des threads et du vecteur de résultats
-    // TODO lancement des threads avec la fonction Bogosort
-    // TODO arrêt des threads et récupération du tableau trié
-    // TODO retourner le tableau trié
-}
+finished = false;
+// TODO création des threads et du vecteur de résultats
+std::vector<PcoThread*> threads;
+std::vector<int> results;
 
+// TODO lancement des threads avec la fonction Bogosort
+for(size_t i =0; i< nbThreads;++i){
+threads.push_back(new PcoThread(bogosort(seq)));
+}
+// TODO arrêt des threads et récupération du tableau trié
+// TODO retourner le tableau trié
+}
 
 void ThreadManager::incrementPercentComputed(double percentComputed)
 {
-    emit sig_incrementPercentComputed(percentComputed);
+emit sig_incrementPercentComputed(percentComputed);
 }

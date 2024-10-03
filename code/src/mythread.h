@@ -19,12 +19,14 @@ un vecteur avec l'algorithme Bogosort déterministe.
 #include "threadmanager.h"
 
 /**
-* @brief bogosort Trie une séquence avec l'algorithme Bogosort déterministe en parallèle
-* @param seq séquence à trier
-* @param pManager Pointeur sur le ThreadManager utilisé pour accéder à l'interface
-* @param k La k-ième itération
-*/
-void bogosort(std::vector<int> seq, ThreadManager* pManager, int k);
+ * @brief bogosort Trie une séquence avec l'algorithme Bogosort déterministe en
+ * parallèle
+ * @param seq séquence à trier
+ * @param pManager Pointeur sur le ThreadManager utilisé pour accéder à
+ * l'interface
+ * @param k La k-ième itération
+ */
+void bogosort(std::vector<int> seq, ThreadManager *pManager, int k,
+              int seqSize);
 
 #endif // MYTHREAD_H
-

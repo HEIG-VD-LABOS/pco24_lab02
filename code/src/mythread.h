@@ -26,7 +26,7 @@ un vecteur avec l'algorithme Bogosort déterministe.
  * l'interface
  * @param k La k-ième itération
  */
-void bogosort(std::vector<int> seq, ThreadManager *pManager, int k,
-              int seqSize);
+void bogosort(std::vector<int> seq, ThreadManager *pManager, int k, int seqSize,
+              int nbThreads);
 
 #endif // MYTHREAD_H

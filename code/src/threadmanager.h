@@ -50,8 +50,8 @@ public:
    */
   void incrementPercentComputed(double percentComputed);
 
-  /** To indicate that one thread has sinished **/
-  bool finished{false};
+  /** To indicate that one thread has finished **/
+  std::atomic<bool> finished{false}; // changé bool en atomic<bool>
 
 signals:
   /**

@@ -24,19 +24,36 @@ std::vector<int> getPermutation(std::vector<int> seq, int k) {
     k %= fact;
   }
 
-  return seqCopy;
+  return permutation;
 }
 
-void bogosort(std::vector<int> seq, ThreadManager *pManager, int k,
-              int seqSize) {
-  for (int i = k; i < facto(seqSize); i + seqSize) {
+// Manage the threads stop in the startSorting function, here just set the flag
+// finished to true so it's triggered in the startSorting function
+void bogosort(std::vector<int> seq, ThreadManager *pManager, int k, int seqSize,
+              int nbThreads) {
+  // TODO
+  long long fact = facto(seqSize);
+  for (long long i = k; i < fact; i += nbThreads) {
+    if (PcoThread::thisThread()->stopRequested()) {
+      return;
+    }
     std::vector<int> perm = getPermutation(seq, i);
 
+    // Est-ce que le pourcentage doit être à 100 s'il finit ou pas ?
+    // Probablement problème de précision quand la valeur est trop petite
+    pManager->incrementPercentComputed((double)1. / fact);
+
     if (is_sorted(perm.begin(), perm.end())) {
+      // Comment implémenter pour que la barre affiche les 100% une fois la perm
+      // trouvée ?
       pManager->results = perm;
+      pManager->finished = true;
+      return;
     }
   }
 
+  pManager->results = std::vector<int>();
+  pManager->finished = true;
+  return;
   // Exemple de mise à jour de la barre de progression
-  pManager->incrementPercentComputed((double)1);
 }
